@@ -29,23 +29,22 @@ public class SatismeterModule extends ReactContextBaseJavaModule {
     }
 
     @ReactMethod
-    public void hook(String userId, String writeKey, String next, Callback callback){
+    public void hook(String userId, String writeKey, ReadableMap traits, Callback callback) {
         final Activity activity = getCurrentActivity();
         callback.invoke("Received userId: " + userId + " writeKey: " + writeKey);
-        HashMap<String, Object> trait = new HashMap();
-        /*
-        if(traits!=null) {
-            HashMap<String, Object> trait = new HashMap();
+
+        HashMap<String, Object> traitsMap = new HashMap();
+        if (traits != null) {
             ReadableMapKeySetIterator iterator = traits.keySetIterator();
             while (iterator.hasNextKey()) {
                 String key = iterator.nextKey();
                 ReadableType type = traits.getType(key);
                 if (type == ReadableType.String) {
-                    trait.put((String) key, (String) traits.getString(key));
+                    traitsMap.put((String) key, (String) traits.getString(key));
                 }
             }
         }
-        */
-        SatisMeter.identify(activity, writeKey, userId, trait);
+
+        SatisMeter.identify(activity, writeKey, userId, traitsMap);
     }
 }
