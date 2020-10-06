@@ -11,16 +11,17 @@
 }
 RCT_EXPORT_MODULE()
 
-RCT_EXPORT_METHOD(hook: userId:(nonnull NSString *) writeKey:(nonnull NSString *) callback:(RCTResponseSenderBlock)callback)
+RCT_REMAP_METHOD(hook, 
+    userId:(nonnull NSString *)userId 
+    writeKey:(nonnull NSString *)writeKey
+    traits:(NSDictionary *)traits
+    callback:(RCTResponseSenderBlock)callback)
 {
     callback(@[[NSString stringWithFormat: @"userId: %@ writeKey: %@", userId, writeKey]]);
     
-    NSDictionary *traitsDictionary = [NSDictionary dictionaryWithObjectsAndKeys:
-                                      nil];
-    
     [[SatisMeter sharedInstance] identifyUserWithUserId: userId
                                                writeKey: writeKey
-                                    andTraitsDictionary: traitsDictionary];
+                                    andTraitsDictionary: traits];
 
 }
 

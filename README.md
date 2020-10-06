@@ -54,7 +54,7 @@ Add the following code to your RN application.
 ```javascript
 import Satismeter from 'react-native-satismeter';
 
-Satismeter.hook('<USER_ID>', '<WRITE_KEY>', '', (message) => {
+Satismeter.hook('<USER_ID>', '<WRITE_KEY>', {}, (message) => {
     this.setState({
     status: 'Hi Satismeter',
     });
@@ -64,6 +64,23 @@ Satismeter.hook('<USER_ID>', '<WRITE_KEY>', '', (message) => {
 Replace the `WRITE_KEY` with the one found in SatisMeter settings / Integrations / API Keys.
 
 Replace `USER_ID` with the ones of the currently logged-in user.
+
+#### Add custom traits
+
+Pass an object containing string values to set custom user traits.
+
+```javascript
+import Satismeter from 'react-native-satismeter';
+
+Satismeter.hook('<USER_ID>', '<WRITE_KEY>', {
+  "name": "Sam Harris",
+  "twitter": "@SamHarrisOrg"
+}, (message) => {
+    this.setState({
+    status: 'Hi Satismeter',
+    });
+});
+```
 
 
 ## Contributors
